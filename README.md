@@ -1,6 +1,6 @@
-# yannisapp
+# yannis
 
-Geburtstagsgeschenk für Yannis
+A new Flutter project.
 
 ## Getting Started
 

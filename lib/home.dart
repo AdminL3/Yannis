@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'Page2.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,50 +8,55 @@ class Home extends StatefulWidget {
 }
 
 class Screen extends State<Home> {
-  bool _switch_on = false;
-  final Color _red = Colors.redAccent.shade400;
-  final Color _green = Colors.lightGreenAccent.shade400;
-  Color _switch_color = Colors.redAccent.shade400;
+  bool _switchValue = true;
+  bool _showFab = false;
+  bool _switchlistvalue = false;
+  Color _switchlistcolor = Colors.redAccent.shade400;
   int _count = 0;
   bool _switchDisabled = false;
 
   void _disableSwitch() {
     setState(() {
       _switchDisabled = true;
-      _switch_color = _red;
-      _switch_on = false;
     });
   }
 
-  void _reset() {
+  void _onShowFabChanged(bool value) {
     setState(() {
-      if (_switch_on) {
-        _switch_on = false;
-        _switch_color = _red;
-      } else {
-        _switch_on = true;
-        _switch_color = _green;
-      }
+      _showFab = value;
+      _switchlistcolor = _color();
     });
+  }
+
+  Color _color() {
+    if (!_switchlistvalue) {
+      _switchlistvalue = true;
+      return Colors.lightGreenAccent.shade400;
+    } else {
+      _switchlistvalue = false;
+      return Colors.redAccent.shade400;
+    }
   }
 
   void _dialog(int x) {
     Widget cancelButton = IconButton(
-      color: _red,
+      color: Colors.redAccent.shade400,
       onPressed: () {
         Navigator.of(context).pop();
       },
       icon: const Icon(Icons.check_sharp),
     );
 
+
     AlertDialog alert1 = AlertDialog(
       title: const Text('Schon aufgegeben?'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const Text("Spaß \n"),
           RichText(
             text: const TextSpan(
-              text: '😜😜\n',
+              text: '😜😜😜😜\n',
               style: TextStyle(fontFamily: 'EmojiOne', fontSize: 20),
             ),
           ),
@@ -111,12 +112,12 @@ class Screen extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xffffffff),
       appBar: AppBar(
         elevation: 4,
         centerTitle: false,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.blueAccent.shade200,
+        backgroundColor: const Color(0xff3a57e8),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.zero,
         ),
@@ -150,42 +151,27 @@ class Screen extends State<Home> {
               ),
               textAlign: TextAlign.start,
             ),
-            value: _switch_on,
-            onChanged: _switchDisabled
-                ? null
-                : (bool newValue) {
-                    setState(() {
-                      _reset();
-                    });
-                  },
-            tileColor: _switch_color,
-            activeColor: _green,
+            value: _showFab,
+            onChanged: _switchDisabled ? null: (bool newValue) {
+              setState(() {
+                _switchValue = _showFab;
+              });
+            },
+            tileColor: _switchlistcolor,
+            activeColor: Colors.lightGreenAccent.shade400,
             activeTrackColor: Colors.lightGreenAccent.shade200,
             controlAffinity: ListTileControlAffinity.trailing,
             dense: false,
-            inactiveThumbColor: _red,
+            inactiveThumbColor: Colors.redAccent.shade700,
             inactiveTrackColor: Colors.redAccent.shade100,
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
             selected: false,
             selectedTileColor: const Color(0x42000000),
-            secondary: defaultTargetPlatform == TargetPlatform.iOS
-                ? CupertinoSwitch(
-                    value: _switch_on,
-                    onChanged: _switchDisabled
-                        ? null
-                        : (bool newValue) {
-                            setState(() {
-                              _reset();
-                            });
-                          },
-                    activeColor: CupertinoColors.activeGreen,
-                  )
-                : null,
           ),
         ),
       ),
-      floatingActionButton: _switch_on
+      floatingActionButton: _showFab
           ? FloatingActionButton(
               onPressed: () {
                 _counter();
@@ -198,11 +184,9 @@ class Screen extends State<Home> {
   }
 
   void _counter() {
-    _count = _count + 1;
+    _count = _count + 1 ;
     print(_count);
-    if (_count >= 20) {
-      _disableSwitch();
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Page2()));
+    if(_count >= 5){
     }
   }
 }
