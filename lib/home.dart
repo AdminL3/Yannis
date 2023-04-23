@@ -16,24 +16,23 @@ class Screen extends State<Home> {
   void _disableSwitch() {
     setState(() {
       _switchDisabled = true;
+      _switch_color = Colors.redAccent.shade400;
+      _switch_on = false;
     });
   }
 
   void _reset() {
     setState(() {
-      _switch_on = _switch_on;
-      _switch_color = _color();
-    });
-  }
-
-  Color _color() {
-    if (!_switch_on) {
-      _switch_on = true;
-      return Colors.lightGreenAccent.shade400;
-    } else {
-      _switch_on = false;
-      return Colors.redAccent.shade400;
+      if(_switch_on) {
+        _switch_on = false;
+        _switch_color = Colors.redAccent.shade400;
+      }
+      else{
+        _switch_on = true;
+        _switch_color = Colors.lightGreenAccent.shade400;
+      }
     }
+    );
   }
 
   void _dialog(int x) {
@@ -50,10 +49,9 @@ class Screen extends State<Home> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text("Spaß \n"),
           RichText(
             text: const TextSpan(
-              text: '😜😜😜😜\n',
+              text: '😜😜\n',
               style: TextStyle(fontFamily: 'EmojiOne', fontSize: 20),
             ),
           ),
@@ -151,7 +149,7 @@ class Screen extends State<Home> {
             value: _switch_on,
             onChanged: _switchDisabled ? null: (bool newValue) {
               setState(() {
-                _switch_on;
+                _reset();
               });
             },
             tileColor: _switch_color,
@@ -183,9 +181,8 @@ class Screen extends State<Home> {
   void _counter() {
     _count = _count + 1;
     print(_count);
-    if (_count >= 5) {
+    if (_count >= 20) {
       _disableSwitch();
-      _switch_on = false;
     }
   }
 }
