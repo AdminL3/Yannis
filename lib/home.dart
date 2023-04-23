@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'Page2.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,16 +29,14 @@ class Screen extends State<Home> {
 
   void _reset() {
     setState(() {
-      if(_switch_on) {
+      if (_switch_on) {
         _switch_on = false;
         _switch_color = _red;
-      }
-      else{
+      } else {
         _switch_on = true;
         _switch_color = _green;
       }
-    }
-    );
+    });
   }
 
   void _dialog(int x) {
@@ -149,11 +151,13 @@ class Screen extends State<Home> {
               textAlign: TextAlign.start,
             ),
             value: _switch_on,
-            onChanged: _switchDisabled ? null: (bool newValue) {
-              setState(() {
-                _reset();
-              });
-            },
+            onChanged: _switchDisabled
+                ? null
+                : (bool newValue) {
+                    setState(() {
+                      _reset();
+                    });
+                  },
             tileColor: _switch_color,
             activeColor: _green,
             activeTrackColor: Colors.lightGreenAccent.shade200,
@@ -165,6 +169,19 @@ class Screen extends State<Home> {
                 const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
             selected: false,
             selectedTileColor: const Color(0x42000000),
+            secondary: defaultTargetPlatform == TargetPlatform.iOS
+                ? CupertinoSwitch(
+                    value: _switch_on,
+                    onChanged: _switchDisabled
+                        ? null
+                        : (bool newValue) {
+                            setState(() {
+                              _reset();
+                            });
+                          },
+                    activeColor: CupertinoColors.activeGreen,
+                  )
+                : null,
           ),
         ),
       ),
@@ -185,6 +202,7 @@ class Screen extends State<Home> {
     print(_count);
     if (_count >= 20) {
       _disableSwitch();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => Page2()));
     }
   }
 }

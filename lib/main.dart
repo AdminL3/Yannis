@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yannisapp/cupertino.dart';
-import 'package:yannisapp/test.dart';
+import 'package:yannisapp/dialog.dart';
 import 'home.dart';
 
 void main() {
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Test(),
+      home: Di(),
     );
   }
 }
