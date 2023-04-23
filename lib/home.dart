@@ -8,10 +8,8 @@ class Home extends StatefulWidget {
 }
 
 class Screen extends State<Home> {
-  bool _switchValue = true;
-  bool _showFab = false;
-  bool _switchlistvalue = false;
-  Color _switchlistcolor = Colors.redAccent.shade400;
+  bool _switch_on = false;
+  Color _switch_color = Colors.redAccent.shade400;
   int _count = 0;
   bool _switchDisabled = false;
 
@@ -21,19 +19,19 @@ class Screen extends State<Home> {
     });
   }
 
-  void _onShowFabChanged(bool value) {
+  void _reset() {
     setState(() {
-      _showFab = value;
-      _switchlistcolor = _color();
+      _switch_on = _switch_on;
+      _switch_color = _color();
     });
   }
 
   Color _color() {
-    if (!_switchlistvalue) {
-      _switchlistvalue = true;
+    if (!_switch_on) {
+      _switch_on = true;
       return Colors.lightGreenAccent.shade400;
     } else {
-      _switchlistvalue = false;
+      _switch_on = false;
       return Colors.redAccent.shade400;
     }
   }
@@ -46,7 +44,6 @@ class Screen extends State<Home> {
       },
       icon: const Icon(Icons.check_sharp),
     );
-
 
     AlertDialog alert1 = AlertDialog(
       title: const Text('Schon aufgegeben?'),
@@ -151,13 +148,13 @@ class Screen extends State<Home> {
               ),
               textAlign: TextAlign.start,
             ),
-            value: _showFab,
+            value: _switch_on,
             onChanged: _switchDisabled ? null: (bool newValue) {
               setState(() {
-                _switchValue = _showFab;
+                _switch_on;
               });
             },
-            tileColor: _switchlistcolor,
+            tileColor: _switch_color,
             activeColor: Colors.lightGreenAccent.shade400,
             activeTrackColor: Colors.lightGreenAccent.shade200,
             controlAffinity: ListTileControlAffinity.trailing,
@@ -171,7 +168,7 @@ class Screen extends State<Home> {
           ),
         ),
       ),
-      floatingActionButton: _showFab
+      floatingActionButton: _switch_on
           ? FloatingActionButton(
               onPressed: () {
                 _counter();
@@ -184,9 +181,11 @@ class Screen extends State<Home> {
   }
 
   void _counter() {
-    _count = _count + 1 ;
+    _count = _count + 1;
     print(_count);
-    if(_count >= 5){
+    if (_count >= 5) {
+      _disableSwitch();
+      _switch_on = false;
     }
   }
 }
