@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'neu.dart';
+import 'package:yannis/neu.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "Yanniii",
-      home: DraggableExampleApp(),
+      home: Yannis(),
     );
   }
 }

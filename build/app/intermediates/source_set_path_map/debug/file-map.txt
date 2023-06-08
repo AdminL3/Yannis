@@ -11,3 +11,4 @@ com.example.yannis.app-mergeDebugResources-9 C:\Users\L-Blu\StudioProjects\Yanni
 com.example.yannis.app-mergeDebugResources-10 C:\Users\L-Blu\StudioProjects\Yannis\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
 com.example.yannis.app-merged_res-11 C:\Users\L-Blu\StudioProjects\Yannis\build\app\intermediates\merged_res\debug
 com.example.yannis.app-packaged_res-12 C:\Users\L-Blu\StudioProjects\Yannis\build\flutter_native_splash\intermediates\packaged_res\debug
+com.example.yannis.app-packaged_res-13 C:\Users\L-Blu\StudioProjects\Yannis\build\shared_preferences_android\intermediates\packaged_res\debug
